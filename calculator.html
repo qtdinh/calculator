@@ -7,26 +7,26 @@
         <link rel = "stylesheet" href="styles.css">
     </head>
     <body>
-        <input TYPE="text" ID="screen" NAME="screen" style="width:99%">
+        <input TYPE="text" ID="screen" NAME="screen">
         <div class = "calculator-grid">
             <button class = "wide">C</button>
             <button>E</button>
-            <button onclick="divide()">÷</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button onclick="multiply()">×</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button onclick="add()">+</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button onclick="subtract()">-</button>
+            <button class = "operation" value = '/'>÷</button>
+            <button class = "number" value = '1'>1</button>
+            <button class = "number" value = '2'>2</button>
+            <button class = "number" value = '3'>3</button>
+            <button class = "operation" value = '*'>×</button>
+            <button class = "number" value = '4'>4</button>
+            <button class = "number" value = '5'>5</button>
+            <button class = "number" value = '6'>6</button>
+            <button class = "operation" value = '+'>+</button>
+            <button class = "number" value = '7'>7</button>
+            <button class = "number" value = '8'>8</button>
+            <button class = "number" value = '9'>9</button>
+            <button class = "operation" value = '-'>-</button>
             <button>.</button>
-            <button>0</button>
-            <button class = "wide">=</button>
+            <button class = "number" value = '0'>0</button>
+            <button class = "equals wide" value = '='>=</button>
         </div>
     </body>
 </html>
