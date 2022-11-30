@@ -5,11 +5,12 @@ let container = document.querySelector('.calculator-grid');
 const numValues = document.querySelectorAll('.number');
 const opValues = document.querySelectorAll('.operation');
 let equals = document.querySelector('.equals');
+let clear = document.querySelector('.clear');
 let savedOperator = '';
 let firstNumber = 0;
 let waitingForSecondOperand = false;
-let reset = false;
-let equalled = false;
+let reset = true;
+display.value = 0;
 
 
 function add(num1, num2) {
@@ -37,6 +38,14 @@ function operate(operator) {
     let num1 = parseFloat(firstNumber);
     let num2 = parseFloat(currentNumber);
 
+    if (firstNumber.length >= 21 && num1 % 1 !== 0) {
+        Math.round(num1);
+    }
+
+    if (currentNumber.length >= 21 && num2 % 2 != 0) {
+        Math.round(num2);
+    }
+
   switch (operator) {
     case '+':
         return add(num1, num2);
@@ -57,8 +66,9 @@ function operate(operator) {
 
 numValues.forEach(number => {
     number.addEventListener('click', function(event) {
-        if(reset) {
+        if(reset || display.value === '0') {
             display.value = '';
+            currentNumber = '';
             reset = false;
         }
         display.value = display.value + event.currentTarget.value;
@@ -85,14 +95,23 @@ opValues.forEach(operation => {
         }
         waitingForSecondOperand = true;
         savedOperator = operation.value;
-        currentNumber = '', reset = true;
+        reset = true;
     });
 });
 
 equals.addEventListener('click', function() {
+    if (currentNumber && savedOperator) {
     display.value = operate(savedOperator);
+    }
     savedOperator = '';
     waitingForSecondOperand = false;
     reset = true;
 });
 
+clear.addEventListener('click', function() {
+    display.value = 0;
+    savedOperator = '';
+    waitingForSecondOperand = false;
+    firstNumber = 0;
+    currentNumber = '';
+});
