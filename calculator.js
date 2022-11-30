@@ -9,6 +9,7 @@ let savedOperator = '';
 let firstNumber = 0;
 let waitingForSecondOperand = false;
 let reset = false;
+let equalled = false;
 
 
 function add(num1, num2) {
@@ -44,6 +45,9 @@ function operate(operator) {
     case '*':
         return multiply(num1, num2);
     case '/':
+        if(num2 === 0) {
+            return "Cannot divide by zero";
+        }
         return divide(num1, num2);
  
     }
@@ -68,19 +72,17 @@ opValues.forEach(operation => {
         //assign the previous result to the first number
         //compute the current number with the first number
 
-        if(savedOperator !== operation.value && waitingForSecondOperand) {
+        if(savedOperator !== operation.value && waitingForSecondOperand && reset) {
             savedOperator = operation.value;
             return;
         }
 
         if(!savedOperator) {
-        firstNumber = currentNumber;
+          firstNumber = display.value;
         } else if (savedOperator) {
             display.value = operate(savedOperator);
             firstNumber = display.value;
         }
-        console.log(firstNumber);
-        console.log(currentNumber);
         waitingForSecondOperand = true;
         savedOperator = operation.value;
         currentNumber = '', reset = true;
@@ -91,5 +93,6 @@ equals.addEventListener('click', function() {
     display.value = operate(savedOperator);
     savedOperator = '';
     waitingForSecondOperand = false;
+    reset = true;
 });
 
